@@ -1,0 +1,62 @@
+
+#include <stdio.h>
+
+void analyzePatient(float weight, float height, int age,
+                    int systolicBP, float *bmi, int *riskCode)
+{
+    // Calculate BMI (height is in centimeters)
+    float heightInMeters = height / 100.0;
+    *bmi = weight / (heightInMeters * heightInMeters);
+
+    // Illustrative cardiac risk algorithm
+    if (systolicBP >= 140 || age >= 60)
+    {
+        *riskCode = 3;  // High Risk
+    }
+    else if (systolicBP >= 120 || age >= 40)
+    {
+        *riskCode = 2;  // Moderate Risk
+    }
+    else
+    {
+        *riskCode = 1;  // Low Risk
+    }
+}
+
+int main()
+{
+    float weight, height, bmi = 0.0;
+    int age, systolicBP, riskCode = 0;
+
+    // Get patient details
+    printf("Enter weight (kg): ");
+    scanf("%f", &weight);
+
+    printf("Enter height (cm): ");
+    scanf("%f", &height);
+
+    printf("Enter age (years): ");
+    scanf("%d", &age);
+
+    printf("Enter systolic blood pressure (mmHg): ");
+    scanf("%d", &systolicBP);
+
+    // Pass BMI and riskCode by reference
+    analyzePatient(weight, height, age, systolicBP,
+                   &bmi, &riskCode);
+
+    // Display updated results
+    printf("\nUpdated Results:\n");
+    printf("BMI: %.2f\n", bmi);
+
+    if (riskCode == 3)
+        printf("Cardiac Risk Code: 3 (High Risk)\n");
+    else if (riskCode == 2)
+        printf("Cardiac Risk Code: 2 (Moderate Risk)\n");
+    else
+        printf("Cardiac Risk Code: 1 (Low Risk)\n");
+
+    return 0;
+}
+
+
