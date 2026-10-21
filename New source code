@@ -1,0 +1,72 @@
+
+#include <stdio.h>
+
+void analyzePatient(float weight, float height, int age,
+                    int systolicBP, float *bmi, int *riskCode)
+{
+    float heightInMeters = height / 100.0;
+
+    *bmi = weight / (heightInMeters * heightInMeters);
+
+    // Illustrative risk classification
+    if (systolicBP >= 140 || age >= 60)
+        *riskCode = 3;
+    else if (systolicBP >= 120 || age >= 40)
+        *riskCode = 2;
+    else
+        *riskCode = 1;
+}
+
+int main()
+{
+    float weight, height, bmi;
+    int age, systolicBP, riskCode;
+
+    printf("===== PATIENT HEALTH ANALYSIS =====\n\n");
+
+    printf("Enter patient weight (kg): ");
+    scanf("%f", &weight);
+
+    printf("Enter patient height (cm): ");
+    scanf("%f", &height);
+
+    printf("Enter patient age (years): ");
+    scanf("%d", &age);
+
+    printf("Enter systolic blood pressure (mmHg): ");
+    scanf("%d", &systolicBP);
+
+    if (weight <= 0 || height <= 0 || age <= 0 ||
+        systolicBP <= 0)
+    {
+        printf("\nInvalid input! Enter positive values.\n");
+        return 1;
+    }
+
+    analyzePatient(weight, height, age, systolicBP,
+                   &bmi, &riskCode);
+
+    // Display all user-entered details
+    printf("\n\n===== PATIENT REPORT =====\n");
+    printf("Weight                 : %.2f kg\n", weight);
+    printf("Height                 : %.2f cm\n", height);
+    printf("Age                    : %d years\n", age);
+    printf("Systolic Blood Pressure : %d mmHg\n", systolicBP);
+
+    // Display calculated results
+    printf("\n===== ANALYSIS RESULTS =====\n");
+    printf("Body Mass Index (BMI)  : %.2f\n", bmi);
+
+    if (riskCode == 3)
+        printf("Cardiac Risk Category  : High Risk\n");
+    else if (riskCode == 2)
+        printf("Cardiac Risk Category  : Moderate Risk\n");
+    else
+        printf("Cardiac Risk Category  : Low Risk\n");
+
+    printf("Risk Code              : %d\n", riskCode);
+
+    printf("\n===== END OF REPORT =====\n");
+
+    return 0;
+}
