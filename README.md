@@ -1,2 +1,2 @@
-# Project-0
+# Project-01
 This my first C project on PATIENT CLINICAL VITALS DIAGNOSTIC PORTAL, where it calculates the BMI and Systolic BP of the patient. In the above source code, I have used call by reference and built a source code.
